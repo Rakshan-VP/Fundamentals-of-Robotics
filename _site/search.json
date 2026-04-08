@@ -10,8 +10,8 @@
     ]
   },
   {
-    "objectID": "1 Preliminary Studies/1 Introduction.html",
-    "href": "1 Preliminary Studies/1 Introduction.html",
+    "objectID": "1 Preliminary Studies/01 Introduction.html",
+    "href": "1 Preliminary Studies/01 Introduction.html",
     "title": "2  Introduction to Robotics",
     "section": "",
     "text": "2.1 Classification of Robots\nRobotics is the study of systems that can sense, think, and act in the physical world. It integrates concepts from mechanical engineering, electronics, computer science, and control theory.\nA robot typically consists of: - Links and joints forming a mechanical structure\n- Actuators that produce motion\n- Sensors that measure internal and external states\n- A controller that computes actions\nRobots can be broadly classified as:",
@@ -21,8 +21,8 @@
     ]
   },
   {
-    "objectID": "1 Preliminary Studies/1 Introduction.html#classification-of-robots",
-    "href": "1 Preliminary Studies/1 Introduction.html#classification-of-robots",
+    "objectID": "1 Preliminary Studies/01 Introduction.html#classification-of-robots",
+    "href": "1 Preliminary Studies/01 Introduction.html#classification-of-robots",
     "title": "2  Introduction to Robotics",
     "section": "",
     "text": "Industrial Robots → Used in manufacturing\n\nMobile Robots → Move in environments (e.g., drones, rovers)\n\nHumanoid Robots → Designed to resemble humans",
@@ -32,8 +32,8 @@
     ]
   },
   {
-    "objectID": "1 Preliminary Studies/1 Introduction.html#mathematical-foundations",
-    "href": "1 Preliminary Studies/1 Introduction.html#mathematical-foundations",
+    "objectID": "1 Preliminary Studies/01 Introduction.html#mathematical-foundations",
+    "href": "1 Preliminary Studies/01 Introduction.html#mathematical-foundations",
     "title": "2  Introduction to Robotics",
     "section": "2.2 Mathematical Foundations",
     "text": "2.2 Mathematical Foundations\nRobotics relies heavily on:\n\nLinear algebra (vectors, matrices)\n\nGeometry (coordinate frames)\n\nCalculus (motion and rates)\n\nA position vector in 3D space is written as:\n\\[\n\\mathbf{p} =\n\\begin{bmatrix}\nx \\\\ y \\\\ z\n\\end{bmatrix}\n\\]",
@@ -43,8 +43,8 @@
     ]
   },
   {
-    "objectID": "1 Preliminary Studies/1 Introduction.html#coordinate-frames",
-    "href": "1 Preliminary Studies/1 Introduction.html#coordinate-frames",
+    "objectID": "1 Preliminary Studies/01 Introduction.html#coordinate-frames",
+    "href": "1 Preliminary Studies/01 Introduction.html#coordinate-frames",
     "title": "2  Introduction to Robotics",
     "section": "2.3 Coordinate Frames",
     "text": "2.3 Coordinate Frames\nEvery robotic system uses coordinate frames to describe motion.\nA frame consists of: - Origin\n- Axes (x, y, z)\nTransformations between frames are fundamental to robotics.",
@@ -54,8 +54,8 @@
     ]
   },
   {
-    "objectID": "1 Preliminary Studies/1 Introduction.html#simple-python-example",
-    "href": "1 Preliminary Studies/1 Introduction.html#simple-python-example",
+    "objectID": "1 Preliminary Studies/01 Introduction.html#simple-python-example",
+    "href": "1 Preliminary Studies/01 Introduction.html#simple-python-example",
     "title": "2  Introduction to Robotics",
     "section": "2.4 Simple Python Example",
     "text": "2.4 Simple Python Example\n\nimport numpy as np\n\np = np.array([1, 2, 3])\np\n\narray([1, 2, 3])",
@@ -65,36 +65,36 @@
     ]
   },
   {
-    "objectID": "2 Kinematics/4 Forward kinematics.html",
-    "href": "2 Kinematics/4 Forward kinematics.html",
-    "title": "3  Forward Kinematics",
+    "objectID": "2 Kinematics/04 Forward Kinematics.html",
+    "href": "2 Kinematics/04 Forward Kinematics.html",
+    "title": "5  Forward Kinematics",
     "section": "",
-    "text": "3.1 Problem Statement\nForward kinematics determines the position and orientation of the end-effector from given joint parameters.\nGiven: - Joint angles (revolute joints)\n- Link lengths\nFind: - End-effector position",
+    "text": "5.1 Problem Statement\nForward kinematics determines the position and orientation of the end-effector from given joint parameters.\nGiven: - Joint angles (revolute joints)\n- Link lengths\nFind: - End-effector position",
     "crumbs": [
       "Part 2: Kinematics",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forward Kinematics</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Forward Kinematics</span>"
     ]
   },
   {
-    "objectID": "2 Kinematics/4 Forward kinematics.html#planar-2-link-manipulator",
-    "href": "2 Kinematics/4 Forward kinematics.html#planar-2-link-manipulator",
-    "title": "3  Forward Kinematics",
-    "section": "3.2 Planar 2-Link Manipulator",
-    "text": "3.2 Planar 2-Link Manipulator\nConsider a 2-link robot arm:\n\nLink lengths: \\(l_1, l_2\\)\n\nJoint angles: \\(\\theta_1, \\theta_2\\)\n\nThe end-effector coordinates are:\n\\[\nx = l_1 \\cos\\theta_1 + l_2 \\cos(\\theta_1 + \\theta_2)\n\\]\n\\[\ny = l_1 \\sin\\theta_1 + l_2 \\sin(\\theta_1 + \\theta_2)\n\\]",
+    "objectID": "2 Kinematics/04 Forward Kinematics.html#planar-2-link-manipulator",
+    "href": "2 Kinematics/04 Forward Kinematics.html#planar-2-link-manipulator",
+    "title": "5  Forward Kinematics",
+    "section": "5.2 Planar 2-Link Manipulator",
+    "text": "5.2 Planar 2-Link Manipulator\nConsider a 2-link robot arm:\n\nLink lengths: \\(l_1, l_2\\)\n\nJoint angles: \\(\\theta_1, \\theta_2\\)\n\nThe end-effector coordinates are:\n\\[\nx = l_1 \\cos\\theta_1 + l_2 \\cos(\\theta_1 + \\theta_2)\n\\]\n\\[\ny = l_1 \\sin\\theta_1 + l_2 \\sin(\\theta_1 + \\theta_2)\n\\]",
     "crumbs": [
       "Part 2: Kinematics",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forward Kinematics</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Forward Kinematics</span>"
     ]
   },
   {
-    "objectID": "2 Kinematics/4 Forward kinematics.html#python-example",
-    "href": "2 Kinematics/4 Forward kinematics.html#python-example",
-    "title": "3  Forward Kinematics",
-    "section": "3.3 Python Example",
-    "text": "3.3 Python Example\n\nimport numpy as np\n\nl1, l2 = 1.0, 1.0\ntheta1, theta2 = np.pi/4, np.pi/6\n\nx = l1*np.cos(theta1) + l2*np.cos(theta1 + theta2)\ny = l1*np.sin(theta1) + l2*np.sin(theta1 + theta2)\n\nx, y\n\n(np.float64(0.9659258262890685), np.float64(1.6730326074756157))",
+    "objectID": "2 Kinematics/04 Forward Kinematics.html#python-example",
+    "href": "2 Kinematics/04 Forward Kinematics.html#python-example",
+    "title": "5  Forward Kinematics",
+    "section": "5.3 Python Example",
+    "text": "5.3 Python Example\n\nimport numpy as np\n\nl1, l2 = 1.0, 1.0\ntheta1, theta2 = np.pi/4, np.pi/6\n\nx = l1*np.cos(theta1) + l2*np.cos(theta1 + theta2)\ny = l1*np.sin(theta1) + l2*np.sin(theta1 + theta2)\n\nx, y\n\n(np.float64(0.9659258262890685), np.float64(1.6730326074756157))",
     "crumbs": [
       "Part 2: Kinematics",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Forward Kinematics</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Forward Kinematics</span>"
     ]
   }
 ]

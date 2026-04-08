@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>2&nbsp; Introduction to Robotics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,27 +23,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./1 Preliminary Studies/01 Introduction.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0f0a6973dfca58b6a28f87d7a68c58f9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../1 Preliminary Studies/02 Motion Description.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0f0a6973dfca58b6a28f87d7a68c58f9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -84,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of Robotics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../1 Preliminary Studies/01 Introduction.html">Part 1: Preliminaries</a></li><li class="breadcrumb-item"><a href="../1 Preliminary Studies/01 Introduction.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -94,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -106,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of Robotics</span></span></a>
   </div>
 </li>
@@ -121,19 +186,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1 Preliminary Studies/01 Introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../1 Preliminary Studies/01 Introduction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1 Preliminary Studies/02 Motion Description.html" class="sidebar-item-text sidebar-link">
+  <a href="../1 Preliminary Studies/02 Motion Description.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1 Preliminary Studies/03 Advanced Representations.html" class="sidebar-item-text sidebar-link">
+  <a href="../1 Preliminary Studies/03 Advanced Representations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
@@ -150,25 +215,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2 Kinematics/04 Forward Kinematics.html" class="sidebar-item-text sidebar-link">
+  <a href="../2 Kinematics/04 Forward Kinematics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Forward Kinematics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2 Kinematics/05 Inverse Kinematics.html" class="sidebar-item-text sidebar-link">
+  <a href="../2 Kinematics/05 Inverse Kinematics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2 Kinematics/06 Jacobian matrix.html" class="sidebar-item-text sidebar-link">
+  <a href="../2 Kinematics/06 Jacobian matrix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2 Kinematics/07 Singularity and Dexterity.html" class="sidebar-item-text sidebar-link">
+  <a href="../2 Kinematics/07 Singularity and Dexterity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">07 Singularity and Dexterity.html</span></span></a>
   </div>
 </li>
@@ -185,19 +250,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3 Dynamics/08 Dynamic Analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../3 Dynamics/08 Dynamic Analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3 Dynamics/09 Dynamics Properties and Representations.html" class="sidebar-item-text sidebar-link">
+  <a href="../3 Dynamics/09 Dynamics Properties and Representations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3 Dynamics/10 Simulation and Calibration.html" class="sidebar-item-text sidebar-link">
+  <a href="../3 Dynamics/10 Simulation and Calibration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
@@ -214,19 +279,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4 Control/11 Linear Motion Control.html" class="sidebar-item-text sidebar-link">
+  <a href="../4 Control/11 Linear Motion Control.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4 Control/12 Nonlinear Motion Control.html" class="sidebar-item-text sidebar-link">
+  <a href="../4 Control/12 Nonlinear Motion Control.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4 Control/13 Force Control.html" class="sidebar-item-text sidebar-link">
+  <a href="../4 Control/13 Force Control.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span></a>
   </div>
 </li>
@@ -237,48 +302,99 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#classification-of-robots" id="toc-classification-of-robots" class="nav-link active" data-scroll-target="#classification-of-robots"><span class="header-section-number">2.1</span> Classification of Robots</a></li>
+  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations"><span class="header-section-number">2.2</span> Mathematical Foundations</a></li>
+  <li><a href="#coordinate-frames" id="toc-coordinate-frames" class="nav-link" data-scroll-target="#coordinate-frames"><span class="header-section-number">2.3</span> Coordinate Frames</a></li>
+  <li><a href="#simple-python-example" id="toc-simple-python-example" class="nav-link" data-scroll-target="#simple-python-example"><span class="header-section-number">2.4</span> Simple Python Example</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
-
-
-
-<section id="fundamentals-of-robotics" class="display-1 fw-bold text-white column-screen" style="background-color: #0b0d0e; padding: 100px 0; margin-top: -60px; border-bottom: 1px solid #191a1b; text-align: center;">
-<h1 class="display-1 fw-bold text-white">Fundamentals of Robotics</h1>
-<h3 class="text-secondary anchored" id="by-rakshan-v-p">by Rakshan V P</h3>
-</section>
-<h2 class="mt-5 anchored" id="preface">Preface</h2>
-<p>Welcome to a comprehensive journey into the mechanics and intelligence of machines. This book is designed to bridge the gap between theoretical physics and practical engineering, providing a rigorous foundation for the next generation of roboticists.</p>
-<div class="grid mt-4">
-<section id="kinematics" class="g-col-12 g-col-md-4">
-<h3 class="anchored">🦾 Kinematics</h3>
-<p>Explore the geometry of motion. Learn how to describe the position and orientation of multi-link systems without the complexity of forces.</p>
-</section>
-<section id="dynamics" class="g-col-12 g-col-md-4">
-<h3 class="anchored">⚙️ Dynamics</h3>
-<p>Understand the “why” behind the move. We dive into Newton-Euler and Lagrangian mechanics to model the forces that drive robotic motion.</p>
-</section>
-<section id="control" class="g-col-12 g-col-md-4">
-<h3 class="anchored">🧠 Control</h3>
-<p>The brain of the system. Master the algorithms—from PID to State-Space—that allow machines to interact with the world with precision.</p>
-</section>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../1 Preliminary Studies/01 Introduction.html">Part 1: Preliminaries</a></li><li class="breadcrumb-item"><a href="../1 Preliminary Studies/01 Introduction.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></h1>
 </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Robotics is the study of systems that can <strong>sense, think, and act</strong> in the physical world. It integrates concepts from mechanical engineering, electronics, computer science, and control theory.</p>
+<p>A robot typically consists of: - <strong>Links and joints</strong> forming a mechanical structure<br>
+- <strong>Actuators</strong> that produce motion<br>
+- <strong>Sensors</strong> that measure internal and external states<br>
+- A <strong>controller</strong> that computes actions</p>
 <hr>
-<h2 id="how-to-use-this-book" class="anchored">How to Use This Book</h2>
+<section id="classification-of-robots" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="classification-of-robots"><span class="header-section-number">2.1</span> Classification of Robots</h2>
+<p>Robots can be broadly classified as:</p>
 <ul>
-<li><strong>Sequential Learning:</strong> Chapters are designed to be read in order, as each builds upon the mathematical foundations of the previous.</li>
-<li><strong>Interactive Examples:</strong> Look for the “Code” blocks throughout the text to see how these concepts are implemented in Python and MATLAB.</li>
-<li><strong>Visual Intuition:</strong> Prioritize understanding the diagrams before diving into the derivations.</li>
+<li><strong>Industrial Robots</strong> → Used in manufacturing<br>
+</li>
+<li><strong>Mobile Robots</strong> → Move in environments (e.g., drones, rovers)<br>
+</li>
+<li><strong>Humanoid Robots</strong> → Designed to resemble humans</li>
 </ul>
 <hr>
-<div class="text-center my-5 fst-italic text-muted">
-<blockquote class="blockquote">
-<p>“Robotics is the intersection of mechanics, electronics, and intelligence.”</p>
-</blockquote>
+</section>
+<section id="mathematical-foundations" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="mathematical-foundations"><span class="header-section-number">2.2</span> Mathematical Foundations</h2>
+<p>Robotics relies heavily on:</p>
+<ul>
+<li>Linear algebra (vectors, matrices)<br>
+</li>
+<li>Geometry (coordinate frames)<br>
+</li>
+<li>Calculus (motion and rates)</li>
+</ul>
+<p>A position vector in 3D space is written as:</p>
+<p><span class="math display">\[
+\mathbf{p} =
+\begin{bmatrix}
+x \\ y \\ z
+\end{bmatrix}
+\]</span></p>
+<hr>
+</section>
+<section id="coordinate-frames" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="coordinate-frames"><span class="header-section-number">2.3</span> Coordinate Frames</h2>
+<p>Every robotic system uses <strong>coordinate frames</strong> to describe motion.</p>
+<p>A frame consists of: - Origin<br>
+- Axes (x, y, z)</p>
+<p>Transformations between frames are fundamental to robotics.</p>
+<hr>
+</section>
+<section id="simple-python-example" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="simple-python-example"><span class="header-section-number">2.4</span> Simple Python Example</h2>
+<div id="2850425e" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>array([1, 2, 3])</code></pre>
+</div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -681,12 +797,15 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Fundamentals of Robotics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Fundamentals of Robotics</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1 Preliminary Studies/01 Introduction.html" class="pagination-link" aria-label="Introduction to Robotics">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../1 Preliminary Studies/02 Motion Description.html" class="pagination-link" aria-label="Introduction to Robotics">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Robotics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

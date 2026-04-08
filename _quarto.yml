@@ -33,7 +33,7 @@ book:
 
 format:
   html:
-    theme: flatly
+    theme: superhero
     toc: true
     toc-depth: 3
     
