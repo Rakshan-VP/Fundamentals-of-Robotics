@@ -1,0 +1,39 @@
+project:
+  type: book
+  output-dir: _site   
+
+book:
+  chapters:
+    - index.qmd
+
+    - part: "Part 1: Preliminaries"
+      chapters:
+        - 1 Preliminary Studies/01 Introduction.qmd
+        - 1 Preliminary Studies/02 Motion Description.qmd
+        - 1 Preliminary Studies/03 Advanced Representations.qmd
+
+    - part: "Part 2: Kinematics"
+      chapters:
+        - 2 Kinematics/04 Forward Kinematics.qmd
+        - 2 Kinematics/05 Inverse Kinematics.qmd
+        - 2 Kinematics/06 Jacobian matrix.qmd
+        - 2 Kinematics/07 Singularity and Dexterity.qmd
+
+    - part: "Part 3: Dynamics"
+      chapters:
+        - 3 Dynamics/08 Dynamic Analysis.qmd
+        - 3 Dynamics/09 Dynamics Properties and Representations.qmd
+        - 3 Dynamics/10 Simulation and Calibration.qmd
+
+    - part: "Part 4: Control"
+      chapters:
+        - 4 Control/11 Linear Motion Control.qmd
+        - 4 Control/12 Nonlinear Motion Control.qmd
+        - 4 Control/13 Force Control.qmd
+
+format:
+  html:
+    theme: flatly
+    toc: true
+    toc-depth: 3
+    

@@ -1,0 +1,64 @@
+---
+title: "Introduction to Robotics"
+---
+
+Robotics is the study of systems that can **sense, think, and act** in the physical world. It integrates concepts from mechanical engineering, electronics, computer science, and control theory.
+
+A robot typically consists of:
+- **Links and joints** forming a mechanical structure  
+- **Actuators** that produce motion  
+- **Sensors** that measure internal and external states  
+- A **controller** that computes actions  
+
+---
+
+## Classification of Robots
+
+Robots can be broadly classified as:
+
+- **Industrial Robots** → Used in manufacturing  
+- **Mobile Robots** → Move in environments (e.g., drones, rovers)  
+- **Humanoid Robots** → Designed to resemble humans  
+
+---
+
+## Mathematical Foundations
+
+Robotics relies heavily on:
+
+- Linear algebra (vectors, matrices)  
+- Geometry (coordinate frames)  
+- Calculus (motion and rates)  
+
+A position vector in 3D space is written as:
+
+$$
+\mathbf{p} =
+\begin{bmatrix}
+x \\ y \\ z
+\end{bmatrix}
+$$
+
+---
+
+## Coordinate Frames
+
+Every robotic system uses **coordinate frames** to describe motion.
+
+A frame consists of:
+- Origin  
+- Axes (x, y, z)  
+
+Transformations between frames are fundamental to robotics.
+
+---
+
+## Simple Python Example
+
+```{python}
+import numpy as np
+
+p = np.array([1, 2, 3])
+p
+```
+

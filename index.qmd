@@ -1,0 +1,49 @@
+---
+title: ""
+page-layout: full
+number-sections: false
+section-divs: false
+toc: false
+---
+
+::: {.column-screen style="background-color: #0b0d0e; padding: 100px 0; margin-top: -60px; border-bottom: 1px solid #191a1b; text-align: center;"}
+# Fundamentals of Robotics {.display-1 .fw-bold .text-white}
+### by Rakshan V P {.text-secondary}
+:::
+
+## Preface {.mt-5}
+
+Welcome to a comprehensive journey into the mechanics and intelligence of machines. This book is designed to bridge the gap between theoretical physics and practical engineering, providing a rigorous foundation for the next generation of roboticists.
+
+::: {.grid .mt-4}
+
+::: {.g-col-12 .g-col-md-4}
+### 🦾 Kinematics
+Explore the geometry of motion. Learn how to describe the position and orientation of multi-link systems without the complexity of forces.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### ⚙️ Dynamics
+Understand the "why" behind the move. We dive into Newton-Euler and Lagrangian mechanics to model the forces that drive robotic motion.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### 🧠 Control
+The brain of the system. Master the algorithms—from PID to State-Space—that allow machines to interact with the world with precision.
+:::
+
+:::
+
+---
+
+## How to Use This Book
+
+* **Sequential Learning:** Chapters are designed to be read in order, as each builds upon the mathematical foundations of the previous.
+* **Interactive Examples:** Look for the "Code" blocks throughout the text to see how these concepts are implemented in Python and MATLAB.
+* **Visual Intuition:** Prioritize understanding the diagrams before diving into the derivations.
+
+---
+
+::: {.text-center .my-5 .fst-italic .text-muted}
+> "Robotics is the intersection of mechanics, electronics, and intelligence."
+:::
