@@ -58,7 +58,7 @@
     "href": "1 Preliminary Studies/01 Introduction.html#simple-python-example",
     "title": "2  Introduction to Robotics",
     "section": "2.4 Simple Python Example",
-    "text": "2.4 Simple Python Example\n\nimport numpy as np\n\np = np.array([1, 2, 3])\np\n\narray([1, 2, 3])",
+    "text": "2.4 Simple Python Example\n\n\nCode\nimport numpy as np\n\np = np.array([1, 2, 3])\np\n\n\narray([1, 2, 3])",
     "crumbs": [
       "Part 1: Preliminaries",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Robotics</span>"
@@ -91,7 +91,7 @@
     "href": "2 Kinematics/04 Forward Kinematics.html#python-example",
     "title": "5  Forward Kinematics",
     "section": "5.3 Python Example",
-    "text": "5.3 Python Example\n\nimport numpy as np\n\nl1, l2 = 1.0, 1.0\ntheta1, theta2 = np.pi/4, np.pi/6\n\nx = l1*np.cos(theta1) + l2*np.cos(theta1 + theta2)\ny = l1*np.sin(theta1) + l2*np.sin(theta1 + theta2)\n\nx, y\n\n(np.float64(0.9659258262890685), np.float64(1.6730326074756157))",
+    "text": "5.3 Python Example\n\n\nCode\nimport numpy as np\n\nl1, l2 = 1.0, 1.0\ntheta1, theta2 = np.pi/4, np.pi/6\n\nx = l1*np.cos(theta1) + l2*np.cos(theta1 + theta2)\ny = l1*np.sin(theta1) + l2*np.sin(theta1 + theta2)\n\nx, y\n\n\n(np.float64(0.9659258262890685), np.float64(1.6730326074756157))",
     "crumbs": [
       "Part 2: Kinematics",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Forward Kinematics</span>"

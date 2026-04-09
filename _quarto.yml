@@ -3,6 +3,11 @@ project:
   output-dir: _site   
 
 book:
+  search: true
+  sidebar:
+    collapse-level: 2
+  page-navigation: true
+
   chapters:
     - index.qmd
 
@@ -33,7 +38,23 @@ book:
 
 format:
   html:
-    theme: superhero
+    theme: darkly
     toc: true
     toc-depth: 3
-    
+    number-sections: true
+    number-depth: 3
+    anchor-sections: true
+    code-copy: true
+    code-fold: true
+    highlight-style: monokai
+    fig-responsive: true
+    lightbox: true
+    smooth-scroll: true
+    page-layout: article
+    css: styles.css
+    math: mathjax
+
+crossref:
+  fig-title: "Figure"
+  tbl-title: "Table"
+  eq-title: "Equation"
