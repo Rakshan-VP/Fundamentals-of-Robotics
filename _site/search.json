@@ -12,56 +12,12 @@
   {
     "objectID": "1 Preliminary Studies/01 Introduction.html",
     "href": "1 Preliminary Studies/01 Introduction.html",
-    "title": "2  Introduction to Robotics",
+    "title": "2  Introduction",
     "section": "",
-    "text": "2.1 Classification of Robots\nRobotics is the study of systems that can sense, think, and act in the physical world. It integrates concepts from mechanical engineering, electronics, computer science, and control theory.\nA robot typically consists of: - Links and joints forming a mechanical structure\n- Actuators that produce motion\n- Sensors that measure internal and external states\n- A controller that computes actions\nRobots can be broadly classified as:",
+    "text": "2.1 Definition and History of Robotics",
     "crumbs": [
       "Part 1: Preliminaries",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Robotics</span>"
-    ]
-  },
-  {
-    "objectID": "1 Preliminary Studies/01 Introduction.html#classification-of-robots",
-    "href": "1 Preliminary Studies/01 Introduction.html#classification-of-robots",
-    "title": "2  Introduction to Robotics",
-    "section": "",
-    "text": "Industrial Robots → Used in manufacturing\n\nMobile Robots → Move in environments (e.g., drones, rovers)\n\nHumanoid Robots → Designed to resemble humans",
-    "crumbs": [
-      "Part 1: Preliminaries",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Robotics</span>"
-    ]
-  },
-  {
-    "objectID": "1 Preliminary Studies/01 Introduction.html#mathematical-foundations",
-    "href": "1 Preliminary Studies/01 Introduction.html#mathematical-foundations",
-    "title": "2  Introduction to Robotics",
-    "section": "2.2 Mathematical Foundations",
-    "text": "2.2 Mathematical Foundations\nRobotics relies heavily on:\n\nLinear algebra (vectors, matrices)\n\nGeometry (coordinate frames)\n\nCalculus (motion and rates)\n\nA position vector in 3D space is written as:\n\\[\n\\mathbf{p} =\n\\begin{bmatrix}\nx \\\\ y \\\\ z\n\\end{bmatrix}\n\\]",
-    "crumbs": [
-      "Part 1: Preliminaries",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Robotics</span>"
-    ]
-  },
-  {
-    "objectID": "1 Preliminary Studies/01 Introduction.html#coordinate-frames",
-    "href": "1 Preliminary Studies/01 Introduction.html#coordinate-frames",
-    "title": "2  Introduction to Robotics",
-    "section": "2.3 Coordinate Frames",
-    "text": "2.3 Coordinate Frames\nEvery robotic system uses coordinate frames to describe motion.\nA frame consists of: - Origin\n- Axes (x, y, z)\nTransformations between frames are fundamental to robotics.",
-    "crumbs": [
-      "Part 1: Preliminaries",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Robotics</span>"
-    ]
-  },
-  {
-    "objectID": "1 Preliminary Studies/01 Introduction.html#simple-python-example",
-    "href": "1 Preliminary Studies/01 Introduction.html#simple-python-example",
-    "title": "2  Introduction to Robotics",
-    "section": "2.4 Simple Python Example",
-    "text": "2.4 Simple Python Example\n\n\nCode\nimport numpy as np\n\np = np.array([1, 2, 3])\np\n\n\narray([1, 2, 3])",
-    "crumbs": [
-      "Part 1: Preliminaries",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to Robotics</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
@@ -95,6 +51,17 @@
     "crumbs": [
       "Part 2: Kinematics",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Forward Kinematics</span>"
+    ]
+  },
+  {
+    "objectID": "1 Preliminary Studies/01 Introduction.html#definition-and-history-of-robotics",
+    "href": "1 Preliminary Studies/01 Introduction.html#definition-and-history-of-robotics",
+    "title": "2  Introduction",
+    "section": "",
+    "text": "2.1.1 What Defines a Robot?\nThe definition of a robot has shifted from early mythological “automata” to sophisticated autonomous agents. To maintain academic and industrial consistency, we rely on the international standard:\n\n\n\n\n\n\n\n“An actuated mechanism programmable in two or more axes with a degree of autonomy, moving within its environment, to perform intended tasks.”\nISO 8373:2021\n\n\n\n\nThis definition highlights that a robot is not merely a machine, but a system capable of Sensing its surroundings, Processing that information, and Acting physically upon the world.\n\n\n2.1.2 Historical Milestones\nThe history of robotics is a timeline of increasing environmental complexity—moving from the predictable factory floor to the unpredictable terrain of Mars and, eventually, the human household. Figure 2.1 provides an interactive look at these turning points.\n\n\nCode\nimport plotly.graph_objects as go\nimport pandas as pd\n\n# --- TIMELINE DATA ---\ndata = [\n    (1950, \"Unimate\", \"The first industrial robot, automating heavy lifting at GM.\", \"https://en.wikipedia.org/wiki/Unimate\"),\n    (1966, \"Shakey\", \"The first mobile robot to perceive and reason about its surroundings.\", \"https://en.wikipedia.org/wiki/Shakey_the_robot\"),\n    (1997, \"Sojourner\", \"First wheeled vehicle to roam another planet (Mars).\", \"https://en.wikipedia.org/wiki/Sojourner_(rover)\"),\n    (2011, \"Curiosity\", \"Mars rover exploring Gale Crater with a complex scientific payload.\", \"https://en.wikipedia.org/wiki/Curiosity_(rover)\"),\n    (2021, \"Optimus\", \"Tesla's general-purpose bipedal humanoid robot project.\", \"https://en.wikipedia.org/wiki/Optimus_(robot)\"),\n    (2024, \"Figure 01\", \"AI-first humanoid utilizing vision-language-action models.\", \"https://robotsguide.com/robots/figure\")\n]\n\ndf = pd.DataFrame(data, columns=[\"Year\", \"Event\", \"Description\", \"Link\"])\ndf['y'] = [1, -1] * (len(df)//2) + ([1] if len(df)%2 else [])\n\n# --- COLORS (Obsidian/Midnight Theme) ---\nBG_MAIN      = \"#0f172a\"  \nBG_CARD      = \"#1e293b\"  \nACCENT_CYAN  = \"#38bdf8\"  \nTEXT_DIM     = \"#94a3b8\"  \nBORDER_COLOR = \"#334155\"  \n\nfig = go.Figure()\n\n# 1. Timeline Base Line\nfig.add_trace(go.Scatter(\n    x=[df['Year'].min()-5, df['Year'].max()+5], y=[0, 0],\n    mode='lines', line=dict(color=BORDER_COLOR, width=2),\n    hoverinfo='none'\n))\n\nfor i, row in df.iterrows():\n    # 2. Vertical Stems\n    fig.add_trace(go.Scatter(\n        x=[row['Year'], row['Year']], y=[0, row['y']],\n        mode='lines', line=dict(color=BORDER_COLOR, width=1),\n        hoverinfo='none'\n    ))\n    \n    # 3. Nodes (Circles)\n    fig.add_trace(go.Scatter(\n        x=[row['Year']], y=[0],\n        mode='markers',\n        marker=dict(size=12, color=ACCENT_CYAN, line=dict(width=4, color=BG_MAIN)),\n        hovertext=f\"&lt;b&gt;{row['Event']}&lt;/b&gt;&lt;br&gt;{row['Description']}\",\n        hoverinfo=\"text\" \n    ))\n\n    # 4. Styled Rounded Boxes (Simulated via high borderpad)\n    label_text = (\n        f\"&lt;span style='color: {TEXT_DIM}; font-size: 11px;'&gt;{row['Year']}&lt;/span&gt;&lt;br&gt;\"\n        f\"&lt;b&gt;&lt;a href='{row['Link']}' target='_blank' \"\n        f\"style='color: white; text-decoration: none;'&gt;{row['Event']}&lt;/a&gt;&lt;/b&gt;\"\n    )\n    \n    fig.add_annotation(\n        x=row['Year'], y=row['y'] * 1.6, # Slightly more offset for rounded look\n        text=label_text,\n        showarrow=False,\n        font=dict(size=13),\n        align=\"center\",\n        bgcolor=BG_CARD, \n        bordercolor=ACCENT_CYAN, # Using cyan for a subtle \"glow\" border\n        borderwidth=1.5,\n        borderpad=12,            # HIGH padding creates the rounded/capsule effect\n        opacity=1\n    )\n\n# --- LAYOUT ---\nfig.update_layout(\n    xaxis=dict(showgrid=False, zeroline=False, showticklabels=False, fixedrange=True),\n    yaxis=dict(showgrid=False, zeroline=False, showticklabels=False, range=[-4, 4], fixedrange=True),\n    paper_bgcolor='rgba(0,0,0,0)',\n    plot_bgcolor='rgba(0,0,0,0)',\n    hoverlabel=dict(\n        bgcolor=BG_CARD,\n        font_size=13,\n        font_color=\"white\",\n        bordercolor=ACCENT_CYAN,\n        # Rounds the tooltip box as well\n        namelength=-1\n    ),\n    margin=dict(l=10, r=10, t=10, b=10),\n    showlegend=False,\n    width=740,\n    height=450\n)\n\nfig.show()\n\n\n\n\n                            \n                                            \n\n\nFigure 2.1: Evolution of Robotics: From Unimate to Humanoids.\n\n\n\n\n\n\nCode\nimport numpy as np\nimport plotly.graph_objects as go\n\n# --- CONFIGURATION ---\nLINK_LENGTH = 8\nAXIS_LENGTH = 2\nCANVAS_RANGE_X = [-8, 8]\nCANVAS_RANGE_Y = [-1.5, 8.5]\nWIDTH = 740\nHEIGHT = 400 \n\n# --- COLOR PALETTE ---\nAXIS_X_COLOR = '#e63946'   \nAXIS_Y_COLOR = '#2a9d8f'   \nLINK_COLOR   = '#7547ff'   \nJOINT_BASE   = '#0052a4'   \nJOINT_TIP    = '#ff7300'   \nJOINT_OUTLINE= '#ff7300'   \nARC_COLOR    = '#ecec42'   \nTEXT_COLOR   = '#ffffff'   \nACCENT_COLOR = '#60a5fa'   \n\ndef create_link_traces(theta_deg):\n    theta_rad = np.radians(theta_deg)\n    x_e, y_e = LINK_LENGTH * np.cos(theta_rad), LINK_LENGTH * np.sin(theta_rad)\n    \n    ax_x = go.Scatter(\n        x=[0, AXIS_LENGTH], y=[0, 0],\n        mode='lines+text',\n        name=\"X-Axis\",\n        line=dict(color=AXIS_X_COLOR, width=2),\n        text=[\"\", \"X\"],\n        textposition=\"top right\",\n        textfont=dict(color=TEXT_COLOR)\n    )\n\n    ax_y = go.Scatter(\n        x=[0, 0], y=[0, AXIS_LENGTH],\n        mode='lines+text',\n        name=\"Y-Axis\",\n        line=dict(color=AXIS_Y_COLOR, width=2),\n        text=[\"\", \"Y\"],\n        textposition=\"top right\",\n        textfont=dict(color=TEXT_COLOR)\n    )\n\n    link = go.Scatter(\n        x=[0, x_e], y=[0, y_e],\n        mode='lines',\n        line=dict(width=12, color=LINK_COLOR),\n        name=\"Link\"\n    )\n\n    base_joint = go.Scatter(\n        x=[0], y=[0],\n        mode='markers',\n        marker=dict(\n            size=24,\n            color=JOINT_BASE,\n            line=dict(width=3, color=JOINT_OUTLINE)\n        ),\n        name=\"Base\"\n    )\n\n    tip_joint = go.Scatter(\n        x=[x_e], y=[y_e],\n        mode='markers',\n        marker=dict(\n            size=18,\n            color=JOINT_TIP,\n            line=dict(width=2, color=JOINT_OUTLINE)\n        ),\n        name=\"Tip\"\n    )\n\n    # Motion Arc\n    t = np.linspace(0, theta_rad, 40)\n    arc = go.Scatter(\n        x=1.8 * np.cos(t),\n        y=1.8 * np.sin(t),\n        mode='lines',\n        name=\"Joint angle\",\n        line=dict(color=ARC_COLOR, width=2.5, dash='dot')\n    )\n\n    return [arc, link,ax_x, ax_y, base_joint, tip_joint]\n\n\ndef get_layout_settings(angles):\n    sliders = [dict(\n        active=0,\n        currentvalue={\n            \"prefix\": \"θ: \",\n            \"suffix\": \"°\",\n            \"font\": {\"size\": 20, \"color\": ARC_COLOR},\n            \"offset\": 20\n        },\n        tickcolor=TEXT_COLOR,\n        font={\"color\": TEXT_COLOR},\n        pad={\"t\": 10},\n        steps=[dict(\n            method=\"animate\",\n            label=str(a),\n            args=[[str(a)], {\"frame\": {\"duration\": 0, \"redraw\": False}, \"mode\": \"immediate\"}]\n        ) for a in angles]\n    )]\n\n    return dict(\n        xaxis=dict(range=CANVAS_RANGE_X, visible=False, fixedrange=True),\n        yaxis=dict(range=CANVAS_RANGE_Y, visible=False, fixedrange=True,\n                   scaleanchor=\"x\", scaleratio=1),\n        sliders=sliders,\n        paper_bgcolor='rgba(0,0,0,0)',\n        plot_bgcolor='rgba(0,0,0,0)',\n        showlegend=False,\n        width=WIDTH,\n        height=HEIGHT,\n        margin=dict(l=20, r=20, t=20, b=20),\n        annotations=[dict(\n            x=0, y=0,\n            text=\"R\",\n            showarrow=False,\n            font=dict(color=TEXT_COLOR, size=20)\n        )]\n    )\n\n\ndef build_revolute_viz():\n    fig = go.Figure()\n    angles = np.arange(0, 181, 2)\n    \n    # Initialize\n    fig.add_traces(create_link_traces(angles[0]))\n    \n    # Frames\n    fig.frames = [\n        go.Frame(data=create_link_traces(a), name=str(a))\n        for a in angles\n    ]\n    \n    # Layout\n    fig.update_layout(**get_layout_settings(angles))\n    \n    return fig\n\n\n# Display\nfig = build_revolute_viz()\nfig.show()",
+    "crumbs": [
+      "Part 1: Preliminaries",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
     ]
   }
 ]

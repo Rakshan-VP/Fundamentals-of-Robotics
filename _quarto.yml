@@ -46,12 +46,14 @@ format:
     anchor-sections: true
     code-copy: true
     code-fold: true
-    highlight-style: monokai
+    code-overflow: wrap
+    highlight-style: ayu-dark
     fig-responsive: true
+    fig-align: center
     lightbox: true
     smooth-scroll: true
+    css: Assets/styles.css
     page-layout: article
-    css: styles.css
     math: mathjax
 
 crossref:
