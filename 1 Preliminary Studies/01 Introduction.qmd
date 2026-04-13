@@ -196,8 +196,266 @@ Links are **rigid structural elements** that connect joints and form the robot�
 #### Revolute Joint (R)  
 A revolute joint provides **one degree of freedom**, allowing rotational motion about a fixed axis similar to a hinge.
 
+```{python}
+import numpy as np
+import plotly.graph_objects as go
+
+# --- CONFIGURATION ---
+CUBOID_W, CUBOID_H, LINK_L = 3.0, 2.0, 6.0
+WIDTH, HEIGHT = 740, 500
+
+COLORS = {
+    'base': '#ff6b6b', 'link': '#7da6ff', 'pin': '#808080',
+    'x': '#ef4444', 'y': '#22c55e', 'z': '#3b82f6'
+}
+
+# --- GEOMETRY UTILS ---
+
+def apply_rotation(v, theta_deg=0, base_transform=None):
+    """Applies base transform, rotation swing, and global Z-rotation."""
+    if base_transform:
+        v = np.array([base_transform(*p) for p in v])
+    
+    # Swing rotation (Link logic)
+    rad = np.radians(theta_deg)
+    v = np.array([
+        [x, z*np.cos(rad) - y*np.sin(rad), z*np.sin(rad) + y*np.cos(rad)]
+        for x, y, z in v
+    ])
+    
+    # Global 90-deg CW rotation about Z
+    return np.array([ (p[1], -p[0], p[2]) for p in v])
+
+def get_cuboid_mesh(w, h, l, color, theta_deg=0, base_transform=None):
+    # Local vertices
+    v = np.array([
+        [-w/2, -h/2, 0], [w/2, -h/2, 0], [w/2, h/2, 0], [-w/2, h/2, 0],
+        [-w/2, -h/2, l], [w/2, -h/2, l], [w/2, h/2, l], [-w/2, h/2, l]
+    ])
+    v = apply_rotation(v, theta_deg, base_transform)
+    
+    faces = [[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[0,3,7,4],[1,2,6,5]]
+    return [
+        go.Mesh3d(
+            x=v[f,0], y=v[f,1], z=v[f,2], i=[0,0], j=[1,2], k=[2,3],
+            color=color, flatshading=True, opacity=1,
+            lighting=dict(ambient=0.45, diffuse=0.8, roughness=0.1, specular=1),
+            scene='scene'
+        ) for f in faces
+    ]
+
+def get_joint_pin(w, h):
+    r, nb = h/2, 50
+    theta = np.linspace(0, 2*np.pi, nb)
+    y_coords = np.linspace(-w/2 - 0.2, w/2 + 0.2, 2)
+    T, Y = np.meshgrid(theta, y_coords)
+    
+    return go.Mesh3d(
+        x=-(r*np.cos(T)).flatten(), y=Y.flatten(), z=(r*np.sin(T)).flatten(),
+        color=COLORS['pin'], alphahull=0, flatshading=True, scene='scene'
+    )
+
+# --- VIZ BUILDER ---
+
+def build_viz():
+    fig = go.Figure()
+    angles = np.arange(0, 181, 2)
+
+    # Static Components
+    base = get_cuboid_mesh(CUBOID_W, CUBOID_H, 5, COLORS['base'], base_transform=lambda x,y,z:(x,-z,y))
+    pin = [get_joint_pin(CUBOID_W, CUBOID_H)]
+    axis_line = [go.Scatter3d(x=[0,0], y=[-4.5,4.5], z=[0,0], mode='lines', 
+                             line=dict(color='white', width=1.2), scene='scene', showlegend=False)]
+    
+    link_init = get_cuboid_mesh(CUBOID_W, CUBOID_H, LINK_L, COLORS['link'], theta_deg=angles[0])
+    fig.add_traces(base + pin + axis_line + link_init)
+
+    # Corner Axes (Scene 2)
+    axes_conf = [
+        (COLORS['x'], 'X', [1.2,0,0], [1.9,0,0]),
+        (COLORS['y'], 'Y', [0,1.2,0], [0,1.9,0]),
+        (COLORS['z'], 'Z', [0,0,1.2], [0,0,1.9])
+    ]
+    
+    for color, label, v_line, v_text in axes_conf:
+        fig.add_trace(go.Scatter3d(
+            x=[0, v_line[0], None, v_text[0]], 
+            y=[0, v_line[1], None, v_text[1]], 
+            z=[0, v_line[2], None, v_text[2]],
+            mode='lines+text', text=["","","",label], textposition="middle center",
+            line=dict(color=color, width=3), textfont=dict(color=color, size=14),
+            scene='scene2', showlegend=False
+        ))
+
+    # Frames
+    fig.frames = [
+        go.Frame(
+            data=base + pin + axis_line + get_cuboid_mesh(CUBOID_W, CUBOID_H, LINK_L, COLORS['link'], theta_deg=a),
+            name=str(a), traces=list(range(len(base) + 2 + len(link_init)))
+        ) for a in angles
+    ]
+
+    fig.update_layout(
+        dragmode=False,
+        scene=dict(
+            domain=dict(x=[0,1], y=[0,1]),
+            xaxis=dict(visible=False), yaxis=dict(visible=False), zaxis=dict(visible=False),
+            aspectmode='data', camera=dict(eye=dict(x=-1.5, y=1.5, z=1.5)), bgcolor='rgba(0,0,0,0)'
+        ),
+        scene2=dict(
+            domain=dict(x=[0.8,0.98], y=[0.75,0.95]),
+            xaxis=dict(visible=False, range=[-2,2]), 
+            yaxis=dict(visible=False, range=[-2,2]), 
+            zaxis=dict(visible=False, range=[-2,2]),
+            camera=dict(eye=dict(x=1.5, y=1.5, z=1.5)), bgcolor='rgba(0,0,0,0)'
+        ),
+        sliders=[dict(
+            active=0, pad={"t":0,"b":50},
+            currentvalue={"prefix":"θ: ","suffix":"°","font":{"color":"white","size":16}},
+            tickcolor="white", font=dict(color="white"),
+            steps=[dict(method="animate", label=str(a), 
+                        args=[[str(a)], {"frame":{"duration":0,"redraw":True},"mode":"immediate"}]) for a in angles]
+        )],
+        paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0,r=0,t=0,b=0), width=WIDTH, height=HEIGHT
+    )
+    return fig
+
+build_viz().show(config={'displayModeBar': False})
+```
+
 #### Prismatic Joint (P)  
 A prismatic joint provides **one degree of freedom**, enabling linear motion along a single axis through sliding.
+
+```{python}
+import numpy as np
+import plotly.graph_objects as go
+
+# --- CONFIGURATION ---
+WIDTH, HEIGHT = 740, 500
+
+# Big body
+BODY_W, BODY_H, BODY_L = 2.5, 3.5 , 3.5
+
+# Small slider
+SLIDER_W, SLIDER_H, SLIDER_L = 1.2, 7.0 , 1.2
+
+COLORS = {
+    'body': '#ff6b6b',
+    'slider': '#7da6ff',
+    'rod': '#cccccc',
+    'x': '#ef4444',
+    'y': '#22c55e',
+    'z': '#3b82f6'
+}
+
+# --- GEOMETRY ---
+
+def cuboid_vertices(w, h, l):
+    return np.array([
+        [-w/2, -h/2, -l/2], [w/2, -h/2, -l/2],
+        [w/2, h/2, -l/2],  [-w/2, h/2, -l/2],
+        [-w/2, -h/2,  l/2], [w/2, -h/2,  l/2],
+        [w/2, h/2,  l/2],  [-w/2, h/2,  l/2]
+    ])
+
+def apply_transform(v, d=0, base=False):
+    if base:
+        v = np.array([(z, x, y) for x, y, z in v])
+    return np.array([[x, y + d, z] for x, y, z in v])
+
+def get_cuboid(w, h, l, color, d=0, base=False):
+    v = cuboid_vertices(w, h, l)
+    v = apply_transform(v, d, base)
+    faces = [[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[0,3,7,4],[1,2,6,5]]
+    return [
+        go.Mesh3d(
+            x=v[f,0], y=v[f,1], z=v[f,2],
+            i=[0,0], j=[1,2], k=[2,3],
+            color=color, flatshading=True,
+            lighting=dict(ambient=0.45, diffuse=0.8, roughness=0.2, specular=0.6),
+            scene='scene'
+        ) for f in faces
+    ]
+
+# --- BUILD ---
+
+def build_viz():
+    fig = go.Figure()
+    displacements = np.linspace(-3, 3, 60)
+
+    body = get_cuboid(BODY_W, BODY_H, BODY_L, COLORS['body'], base=True)
+    slider_init = get_cuboid(SLIDER_W, SLIDER_H, SLIDER_L, COLORS['slider'], d=0)
+    rod = go.Scatter3d(
+        x=[0,0], y=[-6,6], z=[0,0],
+        mode='lines', line=dict(color=COLORS['rod'], width=4),
+        showlegend=False, scene='scene'
+    )
+
+    fig.add_traces(body + [rod] + slider_init)
+
+    axes_conf = [
+        (COLORS['x'], 'X', [1.2,0,0], [1.9,0,0]),
+        (COLORS['y'], 'Y', [0,1.2,0], [0,1.9,0]),
+        (COLORS['z'], 'Z', [0,0,1.2], [0,0,1.9])
+    ]
+
+    for color, label, v_line, v_text in axes_conf:
+        fig.add_trace(go.Scatter3d(
+            x=[0, v_line[0], None, v_text[0]],
+            y=[0, v_line[1], None, v_text[1]],
+            z=[0, v_line[2], None, v_text[2]],
+            mode='lines+text', text=["","","",label], textposition="middle center",
+            line=dict(color=color, width=3), textfont=dict(color=color, size=14),
+            scene='scene2', showlegend=False
+        ))
+
+    fig.frames = [
+        go.Frame(
+            data=body + [rod] + get_cuboid(SLIDER_W, SLIDER_H, SLIDER_L, COLORS['slider'], d=d),
+            name=f"{d:.2f}",
+            traces=list(range(len(body) + 1 + len(slider_init)))
+        ) for d in displacements
+    ]
+
+    fig.update_layout(
+        dragmode=False,
+        scene=dict(
+            domain=dict(x=[0, 1], y=[0, 1]), # Centered horizontally and vertically
+            xaxis=dict(visible=False, range=[-7, 7]),
+            yaxis=dict(visible=False, range=[-7, 7]),
+            zaxis=dict(visible=False, range=[-7, 7]),
+            aspectmode='data',
+            camera=dict(
+                eye=dict(x=-1.5, y=1.5, z=1.5), # Pulled in slightly
+                center=dict(x=0, y=0, z=0)      # Explicitly look at center
+            ),
+            bgcolor='rgba(0,0,0,0)'
+        ),
+        scene2=dict(
+            domain=dict(x=[0.85, 0.98], y=[0.8, 0.95]), # Tucked in the top right
+            xaxis=dict(visible=False, range=[-2, 2]),
+            yaxis=dict(visible=False, range=[-2, 2]),
+            zaxis=dict(visible=False, range=[-2, 2]),
+            camera=dict(eye=dict(x=1.5, y=1.5, z=1.5)),
+            bgcolor='rgba(0,0,0,0)'
+        ),
+        sliders=[dict(
+            active=len(displacements)//2,
+            pad={"t":0,"b":40},
+            currentvalue={"prefix":"d: ", "suffix":" units", "font":{"color":"white","size":16}},
+            tickcolor="white", font=dict(color="white"),
+            steps=[dict(method="animate", label=f"{d:.1f}", 
+                        args=[[f"{d:.2f}"], {"frame":{"duration":0,"redraw":True},"mode":"immediate"}]) 
+                   for d in displacements]
+        )],
+        paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0,r=0,t=0,b=0),
+        width=WIDTH, height=HEIGHT
+    )
+
+    return fig
+
+build_viz().show(config={'displayModeBar': False})
+```
 
 #### Cylindrical Joint (C)  
 A cylindrical joint provides **two degrees of freedom**, combining rotation and translation along the same axis.
@@ -207,154 +465,3 @@ A universal joint provides **two degrees of freedom**, allowing rotation about t
 
 #### Spherical Joint (S)  
 A spherical joint provides **three degrees of freedom**, enabling rotation about three perpendicular axes like a ball-and-socket.
-```{python}
-import numpy as np
-import plotly.graph_objects as go
-
-# --- CONFIGURATION ---
-LINK_LENGTH = 8
-AXIS_LENGTH = 2
-CANVAS_RANGE_X = [-8, 8]
-CANVAS_RANGE_Y = [-1.5, 8.5]
-WIDTH = 740
-HEIGHT = 400 
-
-# --- COLOR PALETTE ---
-AXIS_X_COLOR = '#e63946'   
-AXIS_Y_COLOR = '#2a9d8f'   
-LINK_COLOR   = '#7547ff'   
-JOINT_BASE   = '#0052a4'   
-JOINT_TIP    = '#ff7300'   
-JOINT_OUTLINE= '#ff7300'   
-ARC_COLOR    = '#ecec42'   
-TEXT_COLOR   = '#ffffff'   
-ACCENT_COLOR = '#60a5fa'   
-
-def create_link_traces(theta_deg):
-    theta_rad = np.radians(theta_deg)
-    x_e, y_e = LINK_LENGTH * np.cos(theta_rad), LINK_LENGTH * np.sin(theta_rad)
-    
-    ax_x = go.Scatter(
-        x=[0, AXIS_LENGTH], y=[0, 0],
-        mode='lines+text',
-        name="X-Axis",
-        line=dict(color=AXIS_X_COLOR, width=2),
-        text=["", "X"],
-        textposition="top right",
-        textfont=dict(color=TEXT_COLOR)
-    )
-
-    ax_y = go.Scatter(
-        x=[0, 0], y=[0, AXIS_LENGTH],
-        mode='lines+text',
-        name="Y-Axis",
-        line=dict(color=AXIS_Y_COLOR, width=2),
-        text=["", "Y"],
-        textposition="top right",
-        textfont=dict(color=TEXT_COLOR)
-    )
-
-    link = go.Scatter(
-        x=[0, x_e], y=[0, y_e],
-        mode='lines',
-        line=dict(width=12, color=LINK_COLOR),
-        name="Link"
-    )
-
-    base_joint = go.Scatter(
-        x=[0], y=[0],
-        mode='markers',
-        marker=dict(
-            size=24,
-            color=JOINT_BASE,
-            line=dict(width=3, color=JOINT_OUTLINE)
-        ),
-        name="Base"
-    )
-
-    tip_joint = go.Scatter(
-        x=[x_e], y=[y_e],
-        mode='markers',
-        marker=dict(
-            size=18,
-            color=JOINT_TIP,
-            line=dict(width=2, color=JOINT_OUTLINE)
-        ),
-        name="Tip"
-    )
-
-    # Motion Arc
-    t = np.linspace(0, theta_rad, 40)
-    arc = go.Scatter(
-        x=1.8 * np.cos(t),
-        y=1.8 * np.sin(t),
-        mode='lines',
-        name="Joint angle",
-        line=dict(color=ARC_COLOR, width=2.5, dash='dot')
-    )
-
-    return [arc, link,ax_x, ax_y, base_joint, tip_joint]
-
-
-def get_layout_settings(angles):
-    sliders = [dict(
-        active=0,
-        currentvalue={
-            "prefix": "θ: ",
-            "suffix": "°",
-            "font": {"size": 20, "color": ARC_COLOR},
-            "offset": 20
-        },
-        tickcolor=TEXT_COLOR,
-        font={"color": TEXT_COLOR},
-        pad={"t": 10},
-        steps=[dict(
-            method="animate",
-            label=str(a),
-            args=[[str(a)], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate"}]
-        ) for a in angles]
-    )]
-
-    return dict(
-        xaxis=dict(range=CANVAS_RANGE_X, visible=False, fixedrange=True),
-        yaxis=dict(range=CANVAS_RANGE_Y, visible=False, fixedrange=True,
-                   scaleanchor="x", scaleratio=1),
-        sliders=sliders,
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        showlegend=False,
-        width=WIDTH,
-        height=HEIGHT,
-        margin=dict(l=20, r=20, t=20, b=20),
-        annotations=[dict(
-            x=0, y=0,
-            text="R",
-            showarrow=False,
-            font=dict(color=TEXT_COLOR, size=20)
-        )]
-    )
-
-
-def build_revolute_viz():
-    fig = go.Figure()
-    angles = np.arange(0, 181, 2)
-    
-    # Initialize
-    fig.add_traces(create_link_traces(angles[0]))
-    
-    # Frames
-    fig.frames = [
-        go.Frame(data=create_link_traces(a), name=str(a))
-        for a in angles
-    ]
-    
-    # Layout
-    fig.update_layout(**get_layout_settings(angles))
-    
-    return fig
-
-
-# Display
-fig = build_revolute_viz()
-fig.show()
-```
