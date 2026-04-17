@@ -815,8 +815,13 @@ def build_viz():
 
 build_viz().show(config={'displayModeBar': False})
 ```
+
 #### Universal Joint (U)  
 A universal joint provides **two degrees of freedom**, allowing rotation about two perpendicular axes.
+
+```{python}
+
+```
 
 #### Spherical Joint (S)  
 A spherical joint provides **three degrees of freedom**, enabling rotation about three perpendicular axes like a ball-and-socket.
